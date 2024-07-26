@@ -133,7 +133,8 @@ check_file_not_empty "$TEMP_HITS" "No sequences retrieved for top hits."
 # Step 4: BLASTP - Top hits against species A database
 #--------------------------------------------------------------------------------------------------------
 
-blastp -query $TEMP_HITS -db $SPECIES_A_DB -out ${OUT_DIR}/reciprocal_blastp.out -outfmt 6 -evalue $EVALUE
+blastp -query $TEMP_HITS -db $SPECIES_A_DB -evalue $EVALUE \
+       -out ${OUT_DIR}/reciprocal_blastp.out -outfmt 6  -max_target_seqs 1 
 
 # Check if reciprocal BLASTP found any hits
 check_file_not_empty "${OUT_DIR}/reciprocal_blastp.out" "No reciprocal hits found against species A database."
