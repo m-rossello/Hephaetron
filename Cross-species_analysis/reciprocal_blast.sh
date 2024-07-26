@@ -105,7 +105,8 @@ fi
 # Step 1: BLASTP - Query species A against species B database
 #--------------------------------------------------------------------------------------------------------
 
-blastp -query $QUERY -db $SPECIES_B_DB -out ${OUT_DIR}/initial_blastp.out -outfmt 6 -evalue $EVALUE
+blastp -query $QUERY -db $SPECIES_B_DB -evalue $EVALUE \
+       -out ${OUT_DIR}/initial_blastp.out -outfmt 6  -max_target_seqs 1
 
 # Check if BLASTP found any hits
 check_file_not_empty "${OUT_DIR}/initial_blastp.out" "No hits found for the query against species B database."
