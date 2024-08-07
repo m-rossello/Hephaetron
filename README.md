@@ -20,4 +20,4 @@ Each script is accompanied by detailed usage instructions and examples. Refer to
 
 ## Contact
 
-For more info, support, or to send your favorite cat memes, email Maria at [Maria Rossello](mailto:mariarossello@ub.edu)
+For more info, support, or to send your favorite cat memes, email Maria at [mariarossello@ub.edu](mailto:mariarossello@ub.edu)
