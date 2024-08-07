@@ -17,3 +17,7 @@ https://github.com/m-rossello/Hephaetron.git
 ## Usage
 
 Each script is accompanied by detailed usage instructions and examples. Refer to the README files within individual script directories for specific guidance.
+
+## Contact
+
+For more info, support, or to send your favorite cat memes, email Maria at [Maria Rossello](mailto:mariarossello@ub.edu)
