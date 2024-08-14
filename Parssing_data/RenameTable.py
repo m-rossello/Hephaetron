@@ -144,7 +144,7 @@ def substitute_all_values(df, substitutions_dict):
         # If the cell is not a list
             return substitutions_dict.get(cell, cell)
     
-    return df.applymap(substitute_in_cell
+    return df.applymap(substitute_in_cell)
 
 #########################################################################################################
 # PROCESS DATA
@@ -153,6 +153,7 @@ def substitute_all_values(df, substitutions_dict):
 # Open files
 equivalences_table = open_table_files(args.table)
 file_df = open_table_files(args.file)
+file_df = file_df.applymap(lambda x: x.split(' ') if isinstance(x, str) else x)
 
 # Transform the table of equivalences to a dictionary
 equivalences_dict = make_dict_from_table(equivalences_table)
