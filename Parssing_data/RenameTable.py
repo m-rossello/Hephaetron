@@ -4,7 +4,7 @@
 RenameTable.py
 
 Author: Maria Rossello
-Date updated: July 2024
+Date updated: Ago 2024
 Contact: mariarossello@ub.edu
 
 Description:
@@ -126,15 +126,25 @@ def substitute_column_values(df, substitutions_dict, column_index):
 def substitute_all_values(df, substitutions_dict):
     """
     Substitutes values in all columns of a DataFrame using a given dictionary.
-    
+    Handles cells containing lists or individual values.
+
     Args:
-        df (pandas.DataFrame): The DataFrame whose values are to be substituted.
-        substitutions_dict (dict): Dictionary where keys are the values to be replaced and values are the replacements.
-    
+    - df (pd.DataFrame): The DataFrame whose values are to be substituted. Each cell may contain a list of values or a single value.
+    - substitutions_dict (dict): A dictionary where keys are the values to be replaced and values are the replacements.
+
     Returns:
-        pd.DataFrame: A new DataFrame with substituted values.
+    - pd.DataFrame: A new DataFrame with substituted values.
     """
-    return df.applymap(lambda x: substitutions_dict.get(x, x))
+
+    def substitute_in_cell(cell):
+        if isinstance(cell, list):
+        # If the cell is a list
+            return [substitutions_dict.get(item, item) for item in cell]
+        else:
+        # If the cell is not a list
+            return substitutions_dict.get(cell, cell)
+    
+    return df.applymap(substitute_in_cell
 
 #########################################################################################################
 # PROCESS DATA
