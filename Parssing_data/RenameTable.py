@@ -111,16 +111,26 @@ def make_dict_from_table(table_df):
 def substitute_column_values(df, substitutions_dict, column_index):
     """
     Substitutes values in a specified column of a DataFrame using a given dictionary.
-    
+    Handles cells containing lists or individual values.
+
     Args:
-        df (pandas.DataFrame): The DataFrame whose column values are to be substituted.
-        substitutions_dict (dict): Dictionary where keys are the values to be replaced and values are the replacements.
-        column_index (int): The column index in which to apply the substitutions.
-    
+    - df (pd.DataFrame): The DataFrame whose column values are to be substituted.
+    - substitutions_dict (dict): A dictionary where keys are the values to be replaced and values are the replacements.
+    - column_index (int): The column index in which to apply the substitutions.
+
     Returns:
-        pd.DataFrame: A new DataFrame with substituted values in the specified column.
+    - pd.DataFrame: A new DataFrame with substituted values in the specified column.
     """
-    df.iloc[:, column_index] = df.iloc[:, column_index].map(substitutions_dict).fillna(df.iloc[:, column_index])
+
+    def substitute_value(value):
+        if isinstance(value, list):
+        # The value is a list
+            return [substitutions_dict.get(str(item), str(item)) for item in value]
+        else:
+        # The value is not a list
+            return substitutions_dict.get(str(value), str(value))
+
+    df.iloc[:, column_index] = df.iloc[:, column_index].map(substitute_value)
     return df
 
 def substitute_all_values(df, substitutions_dict):
@@ -138,11 +148,11 @@ def substitute_all_values(df, substitutions_dict):
 
     def substitute_in_cell(cell):
         if isinstance(cell, list):
-        # If the cell is a list
-            return [substitutions_dict.get(item, item) for item in cell]
+        # The value is a list
+            return ' '.join([substitutions_dict.get(str(item), str(item)) for item in cell])
         else:
-        # If the cell is not a list
-            return substitutions_dict.get(cell, cell)
+        # The value is not a list
+            return substitutions_dict.get(str(cell), str(cell))
     
     return df.applymap(substitute_in_cell)
 
